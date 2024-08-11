@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./login.css"
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -17,11 +18,16 @@ const handleAvater=e=>{
     
 }
 
+const handleLogin=(e)=>{
+e.preventDefault()
+toast.error("Hello")
+}
+
     return (
         <div className='login'>
             <div className="item">
                 <h2>Welcome back,</h2>
-                <form action="">
+                <form onSubmit={handleLogin}>
                      <input type="text" placeholder='Email' name="email" />
                 <input type="password" placeholder='Password' name="password" />
                 <button>Sign In</button>
@@ -29,6 +35,8 @@ const handleAvater=e=>{
                
             </div>
             <div className="separator"></div>
+
+            
             <div className="item">
             <h2>Create an Account</h2>
 

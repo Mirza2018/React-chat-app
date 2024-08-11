@@ -4,13 +4,13 @@
    
   
 } 
-.search{
+.chatList .search{
     display: flex;
     align-items: center;
     gap:20px;
     padding: 20px;
 }
-.searchBar{
+.chatList .searchBar{
     flex:1;
     background-color: rgba(17,25,40,0.5);
     display: flex;
@@ -18,18 +18,18 @@
     gap:20px;
     border-radius: 10px;
 }
-.searchBar input{
+.chatList .searchBar input{
     background-color: transparent;
     border: none;
     outline: none;
     color:white;
     flex: 1;
 }
-.searchBar img{
+.chatList .searchBar img{
    width: 20px;
    height: 20px;
 }
-.add{
+.chatList .add{
     width: 36px;
    height: 36px;
    background-color: rgba(17,25,40,0.5);
@@ -37,8 +37,9 @@
    border-radius: 10px;
    cursor: pointer;
 }
-.item{
+.chatList .item{
     display:flex;
+    flex-direction: row;
     align-items: center;
     gap: 20px;
     padding: 20px;
@@ -47,21 +48,21 @@
     
 }
 
-.item img{
+.chatList .item img{
     height: 50px;
     width: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
-.texts{
+.chatList .texts{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.texts span{
+.chatList .texts span{
     font-weight: 500;
 }
-.texts p{
+.chatList .texts p{
 font-size: 14px;
 font-weight: 300;
 }
