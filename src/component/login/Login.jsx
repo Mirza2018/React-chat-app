@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./login.css"
 import { toast } from 'react-toastify';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db} from '../../library/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import upload from '../../library/upload';
@@ -14,7 +14,7 @@ const Login = () => {
         url:""
     })
 
-const []
+const [loading,setLoading]=useState(false)
 
 
 const handleAvater=e=>{
@@ -27,13 +27,32 @@ const handleAvater=e=>{
     
 }
 
-const handleLogin=(e)=>{
+const handleLogin=async (e)=>{
 e.preventDefault()
+setLoading(true)
+
+const formData=new FormData(e.target)
+const {email,password}=Object.fromEntries(formData)
+console.log(email,password);
+
+try{
+const res= await signInWithEmailAndPassword(auth,email,password)
+console.log(res);
+
+}catch(err){
+console.log(err);
+toast.error(err.message)
+
+}finally{
+    setLoading(false);
+}
+
 
 }
 
 const handleRegister=async (e)=>{
 e.preventDefault()
+setLoading(true)
 const formData=new FormData(e.target)
 const {username,email,password}=Object.fromEntries(formData)
 
@@ -63,9 +82,11 @@ toast.success("Account created! You can login now!")
 
 
 catch(err){
-    toast.error(err)
+    toast.error(err.message)
     console.log(err);
 
+}finally{
+    setLoading(false)
 }
 
 }
@@ -77,7 +98,11 @@ catch(err){
                 <form onSubmit={handleLogin}>
                      <input type="text" placeholder='Email' name="email" />
                 <input type="password" placeholder='Password' name="password" />
-                <button>Sign In</button>
+                <button disabled={loading}> 
+                {
+                        loading ? "Loading" : "Sign In"
+                    }
+                </button>
                 </form>
                
             </div>
@@ -97,7 +122,13 @@ catch(err){
                 <input type="text" placeholder='Username' name="username" />
                 <input type="text" placeholder='Email' name="email" />
                 <input type="password" placeholder='Password' name="password" />
-                <button>Sign Up</button>
+                <button disabled={loading}>
+                    {
+                        loading ? "Loading" : "Sign Up"
+                    }
+                   
+                    
+                    </button>
 </form>
 
             </div>
