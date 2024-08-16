@@ -16,7 +16,7 @@ const {currentUser,isLoading,fetchUserInfo}=useUserStore()
 
   useEffect(()=>{
     const unSub = onAuthStateChanged(auth,(user)=>{
-      fetchUserInfo(user.uid)
+      fetchUserInfo(user?.uid)
       
     })
     return()=>{
