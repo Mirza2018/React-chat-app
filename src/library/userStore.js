@@ -26,9 +26,6 @@ if(docSnap.exists()){
 }
 
 
- 
- 
-
   }
  
 }))
