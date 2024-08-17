@@ -24,7 +24,7 @@ if(docSnap.exists()){
   return set({currentUser:null,isLoading:false})
   
 }
-
+ 
 
   }
  

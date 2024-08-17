@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./chat.css"
 import EmojiPicker from 'emoji-picker-react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../library/firebase';
+import { useChatStore } from '../../library/chatStore';
 
 const Chat = () => {
+    const [chat,setChat]=useState()
     const [open,setOpen]=useState(false)
     const [text,setText]=useState("")
+  const {chatId}=useChatStore()
 
     const handleEmoji=e=>{
 // console.log(e.emoji);
@@ -16,6 +21,16 @@ const endRef=useRef(null)
     useEffect(()=>{
         endRef.current?.scrollIntoView({behavior:"smooth"})
     },[])
+
+    useEffect(()=>{
+        const unSub=onSnapshot(doc(db,"chats",chatId),(res)=>{
+            setChat(res.data())
+        })
+        return()=>{
+            unSub();
+        }
+    },[chatId])
+    // console.log(chat)
 
 
     return (
@@ -38,66 +53,31 @@ const endRef=useRef(null)
 
 
            <div className="center">
-            <div className="message own">
-                <img src="./avatar.png" alt="" />
-                <div className="texts">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
-                </div>
-            </div>
-            <div className="message">
+          
+           {chat?.messages?.map((message)=>(
+            <div className="message own" key={message?.createAt}>
             <img src="./avatar.png" alt="" />
                 <div className="texts">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
-                </div>
-            </div>
-            <div className="message own">
-            <img src="./avatar.png" alt="" />
-                <div className="texts">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
-                </div>
-            </div>
-            <div className="message">
-            <img src="./avatar.png" alt="" />
-                <div className="texts">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
-                </div>
-            </div>
-            <div className="message own">
-            <img src="./avatar.png" alt="" />
-                <div className="texts">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
-                </div>
-            </div>
-            <div className="message">
-            <img src="./avatar.png" alt="" />
-                <div className="texts">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
-                </div>
-            </div>
-            <div className="message own">
-            <img src="./avatar.png" alt="" />
-                <div className="texts">
-                    <img src="https://cdn2.unrealengine.com/world-of-goo-2-1-2880x1620-7e18f4b1ae55.jpg" alt="" />
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <span>1 min ago</span>
+                    {message?.img && <img src={message?.img} alt="" />}
+                    
+                    <p>{message?.text}</p>
+                    {/* <span>1 min ago</span> */}
                 </div>
             </div> 
+           )) }
 
             
-            <div className="message">
+            {/* <div className="message">
             <img src="./avatar.png" alt="" />
                 <div className="texts">
                     
                     <p>Lorem ipsum dolor sit amet consectetur.</p>
                     <span>1 min ago</span>
                 </div>
-            </div>
+            </div> */}
+
+
+
             <div ref={endRef}></div>
            </div>
            <div className="bottom">
