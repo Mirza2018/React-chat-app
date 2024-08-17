@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./chat.css"
 import EmojiPicker from 'emoji-picker-react';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../../library/firebase';
 import { useChatStore } from '../../library/chatStore';
+import { useUserStore } from '../../library/userStore';
 
 const Chat = () => {
     const [chat,setChat]=useState()
     const [open,setOpen]=useState(false)
     const [text,setText]=useState("")
-  const {chatId}=useChatStore()
+  const {chatId,user}=useChatStore()
+  const {currentUser}=useUserStore()
 
     const handleEmoji=e=>{
 // console.log(e.emoji);
@@ -31,7 +33,55 @@ const endRef=useRef(null)
         }
     },[chatId])
     // console.log(chat)
+const handleSend=async ()=>{
+    if(text==="") return;
+    try {
+        await updateDoc(doc(db,"chats",chatId),{
+            messages:arrayUnion({
+                senderId:currentUser.id,
+                text,
+                createdAt:new Date(),
+            })
 
+        })
+
+
+            const userIDs=[currentUser.id,user.id];
+            userIDs.forEach(async(id)=>{
+
+           
+
+
+            const userChatsRef=doc(db,"userchats",id)
+            const userChatsSnapshot=await getDoc(userChatsRef)
+
+            if(userChatsSnapshot.exists()){
+                const userChatsData=userChatsSnapshot.data()
+                const chatIndex=userChatsData.chats.findIndex(c=>c.chatId===chatId)
+                userChatsData.chats[chatIndex].lastMessage=text;
+                userChatsData.chats[chatIndex].isSeen=id===currentUser.id ? true :false ;
+                userChatsData.chats[chatIndex].updateAt=Date.now();
+
+    
+
+
+                await updateDoc(userChatsRef,{
+                    chats:userChatsData.chats,
+                });
+            }
+      });
+
+
+    } catch (err) {
+        console.log(err);
+        
+        
+    }
+  
+
+
+
+}
 
     return (
         <div className='chat'>
@@ -94,7 +144,7 @@ const endRef=useRef(null)
                 </div>
                
             </div>
-            <button className='sendButton'>send</button>
+            <button className='sendButton' onClick={handleSend}>send</button>
            </div>
         </div>
     );
