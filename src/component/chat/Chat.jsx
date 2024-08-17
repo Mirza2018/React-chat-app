@@ -5,11 +5,34 @@ import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firesto
 import { db } from '../../library/firebase';
 import { useChatStore } from '../../library/chatStore';
 import { useUserStore } from '../../library/userStore';
+import upload from '../../library/upload';
 
 const Chat = () => {
     const [chat,setChat]=useState()
     const [open,setOpen]=useState(false)
     const [text,setText]=useState("")
+    const [img,setImg]=useState({
+        file:"",
+        url:""
+    })
+
+
+    const handleImg=(e)=>{
+
+        if(e.target.files[0]){
+            setImg({
+                file:e.target.files[0],
+                url:URL.createObjectURL(e.target.files[0])
+            })
+        }
+
+         
+
+           
+    }
+    
+ console.log("......",img);
+
   const {chatId,user}=useChatStore()
   const {currentUser}=useUserStore()
 
@@ -34,14 +57,28 @@ const endRef=useRef(null)
     },[chatId])
     // console.log(chat)
 const handleSend=async ()=>{
+
     if(text==="") return;
+
+    let imgUrl=null
+
     try {
+
+
+        if(img.file){
+            imgUrl=await upload(img.file)
+        }
+
+
+
+
         await updateDoc(doc(db,"chats",chatId),{
             messages:arrayUnion({
                 senderId:currentUser.id,
                 text,
                 createdAt:new Date(),
-            })
+                ...(imgUrl && {img:imgUrl }),
+            }),
 
         })
 
@@ -77,8 +114,12 @@ const handleSend=async ()=>{
         
         
     }
+    setImg({
+        file:null,
+        url:""
+    })
   
-
+setText("")
 
 
 }
@@ -88,9 +129,9 @@ const handleSend=async ()=>{
            <div className="top">
 
             <div className="user">
-                <img src="./avatar.png" alt="" />
+                <img src={user?.avatar || "./avatar.png"} alt="" />
                 <div className="textsc">
-                    <span>Mirza</span>
+                    <span>{user?.username}</span>
                     <p>Lorem ipsum dolor sit amet.</p>
                 </div>
             </div>
@@ -105,7 +146,7 @@ const handleSend=async ()=>{
            <div className="center">
           
            {chat?.messages?.map((message)=>(
-            <div className="message own" key={message?.createAt}>
+            <div className={message.senderId ===currentUser?.id ? "message own" :"message"} key={message?.createAt}>
             <img src="./avatar.png" alt="" />
                 <div className="texts">
                     {message?.img && <img src={message?.img} alt="" />}
@@ -115,6 +156,12 @@ const handleSend=async ()=>{
                 </div>
             </div> 
            )) }
+
+        {img?.url && <div className="message own">
+        <div className='texts'>
+            <img src={img.url} alt="" />
+        </div>
+        </div>}
 
             
             {/* <div className="message">
@@ -132,7 +179,12 @@ const handleSend=async ()=>{
            </div>
            <div className="bottom">
             <div className="icons">
-                <img src="./img.png" alt="" />
+                <label htmlFor="file" >
+                    <img src="./img.png"alt="" />
+                </label>
+                
+                <input type="file" id='file'  style={{display:'none'}}  onChange={handleImg} />
+
                 <img src="./camera.png" alt="" />
                 <img src="./mic.png" alt="" />
             </div>
