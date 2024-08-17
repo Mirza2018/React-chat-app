@@ -134,6 +134,10 @@ img{
     border-radius: 10px;
     padding: 20px;
     font-size: 16px;
+    &:disabled{
+      
+        cursor: not-allowed;
+    }
 }
 .sendButton{
     background: #5183fe;
@@ -142,6 +146,10 @@ img{
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    &:disabled{
+        background-color: #5182fe70;
+        cursor: not-allowed;
+    }
 }
 .emoji{
     position: relative;

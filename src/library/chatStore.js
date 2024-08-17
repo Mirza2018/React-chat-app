@@ -36,7 +36,7 @@ else{
     chatId,
     user,
     isCurrentUserBlocked: false,
-    isReceiverBlocked:true
+    isReceiverBlocked:false
   });
 }
 

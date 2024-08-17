@@ -31,9 +31,9 @@ const Chat = () => {
            
     }
     
- console.log("......",img);
 
-  const {chatId,user}=useChatStore()
+
+  const {chatId,user,isCurrentUserBlocked,isReceiverBlocked}=useChatStore()
   const {currentUser}=useUserStore()
 
     const handleEmoji=e=>{
@@ -144,10 +144,14 @@ setText("")
 
 
            <div className="center">
-          
+   
            {chat?.messages?.map((message)=>(
-            <div className={message.senderId ===currentUser?.id ? "message own" :"message"} key={message?.createAt}>
-            <img src="./avatar.png" alt="" />
+            <div className={message.senderId ===currentUser?.id ? "message own" :"message"} 
+            key={message.createdAt}
+            >
+
+
+            <img src={"./avatar.png"} alt="" />
                 <div className="texts">
                     {message?.img && <img src={message?.img} alt="" />}
                     
@@ -188,7 +192,11 @@ setText("")
                 <img src="./camera.png" alt="" />
                 <img src="./mic.png" alt="" />
             </div>
-            <input type="text" placeholder='Type a message...' onChange={e=>setText(e.target.value)}  value={text}/>
+            <input type="text" 
+            placeholder={isCurrentUserBlocked || isReceiverBlocked ?"You cannot send a message":'Type a message...'} 
+            onChange={e=>setText(e.target.value)}  value={text}
+            disabled={isCurrentUserBlocked || isReceiverBlocked}
+            />
             <div className="emoji">
                 <img onClick={()=>setOpen(!open)} src="./emoji.png" alt="" />
                 <div className="picker">
@@ -196,7 +204,10 @@ setText("")
                 </div>
                
             </div>
-            <button className='sendButton' onClick={handleSend}>send</button>
+            <button className='sendButton' onClick={handleSend}
+            disabled={isCurrentUserBlocked || isReceiverBlocked}
+            
+            >send</button>
            </div>
         </div>
     );

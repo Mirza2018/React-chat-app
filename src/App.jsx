@@ -26,7 +26,7 @@ const {chatId}=useChatStore()
     }
 
   },[fetchUserInfo])
-console.log(currentUser);
+
 
 
 

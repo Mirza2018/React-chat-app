@@ -6,6 +6,7 @@ import { useUserStore } from '../../../../library/userStore';
 
 const AddUser = () => {
 
+    const [add,setadd]=useState(false)
     const [user,setUser]=useState(null)
     const {currentUser}=useUserStore()
 
@@ -33,6 +34,7 @@ const AddUser = () => {
        
     }
     const handleAdd=async()=>{
+        setadd(true)
 
         const chatRef=collection(db,"chats")
         const userChatRef=collection(db,"userchats")
@@ -70,6 +72,7 @@ const AddUser = () => {
             console.log(err);
             
         }
+        setadd(false)
     }
 
     return (
@@ -83,7 +86,7 @@ const AddUser = () => {
                     <img src={user.avatar || "./avatar.png"} alt="" />
                     <span>{user.username}</span>
                 </div>
-                <button onClick={handleAdd}>Add User</button>
+                <button onClick={handleAdd} disabled={add} >Add User</button>
             </div>}
         </div>
     );
