@@ -45,7 +45,7 @@ const Detail = () => {
             <div className="user">
                 <img src={user?.avatar || "./avatar.png"} alt="" />
                 <p>{user?.username}</p>
-                <span>Lorem ipsum dolor sit amet consectetur.</span>
+                {/* <span>A perfact man</span> */}
             </div>
             <div className="info">
                 <div className="option">
@@ -82,7 +82,7 @@ const Detail = () => {
                     <div className="photos">
                         <div className="photoItem">
                             <div className="photoDetail">
-                                <img src="https://cdn2.unrealengine.com/world-of-goo-2-1-2880x1620-7e18f4b1ae55.jpg" alt="" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTyrUL5QB8bx9BSQ_yqcJ6AUax3inShCITPw&s" alt="" />
                             <span>
                                 Photo_goo.png
                             </span> 
@@ -91,7 +91,7 @@ const Detail = () => {
                         </div>
                         <div className="photoItem">
                             <div className="photoDetail">
-                                <img src="https://cdn2.unrealengine.com/world-of-goo-2-1-2880x1620-7e18f4b1ae55.jpg" alt="" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTyrUL5QB8bx9BSQ_yqcJ6AUax3inShCITPw&s" alt="" />
                             <span>
                                 Photo_goo.png
                             </span> 
@@ -100,7 +100,7 @@ const Detail = () => {
                         </div>
                         <div className="photoItem">
                             <div className="photoDetail">
-                                <img src="https://cdn2.unrealengine.com/world-of-goo-2-1-2880x1620-7e18f4b1ae55.jpg" alt="" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTyrUL5QB8bx9BSQ_yqcJ6AUax3inShCITPw&s" alt="" />
                             <span>
                                 Photo_goo.png
                             </span> 
@@ -109,7 +109,7 @@ const Detail = () => {
                         </div>
                         <div className="photoItem">
                             <div className="photoDetail">
-                                <img src="https://cdn2.unrealengine.com/world-of-goo-2-1-2880x1620-7e18f4b1ae55.jpg" alt="" />
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTyrUL5QB8bx9BSQ_yqcJ6AUax3inShCITPw&s" alt="" />
                             <span>
                                 Photo_goo.png
                             </span> 

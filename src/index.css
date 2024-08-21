@@ -7,16 +7,20 @@
   }
   body{
     background-image: url(/bg.jpg);
+    /* background-color: blue; */
     display: flex;
     align-items: center;
     justify-content: center;
+    /* height: 100vh; */
+    color:white;
     height: 100vh;
-    color:white
+
   }
   .container{
-    height: 80vh;
+    height: 98vh;
     width: 90vw;
-    background-color: rgba(37, 36, 116, 0.589);
+    /* scale: 0.9; */
+    background-color: rgba(33, 31, 135, 0.606);
     backdrop-filter: blur(19px) saturate(180%);
     border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.123);

@@ -124,6 +124,8 @@ setText("")
 
 }
 
+console.log(currentUser,user);
+
     return (
         <div className='chat'>
            <div className="top">
@@ -132,7 +134,7 @@ setText("")
                 <img src={user?.avatar || "./avatar.png"} alt="" />
                 <div className="textsc">
                     <span>{user?.username}</span>
-                    <p>Lorem ipsum dolor sit amet.</p>
+                    <p>A perfact man.</p>
                 </div>
             </div>
             <div className="icons">
@@ -151,7 +153,7 @@ setText("")
             >
 
 
-            <img src={"./avatar.png"} alt="" />
+            <img src={message.senderId ===currentUser?.id ? currentUser?.avatar :user?.avatar} alt="" />
                 <div className="texts">
                     {message?.img && <img src={message?.img} alt="" />}
                     
