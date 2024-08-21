@@ -18,8 +18,7 @@
 
 ## **About**
 
-This is  real-time chat application. It allows users to message. This application also includes user authentication.
-here use FireStor and Firebase storage.
+This is  real-time chat application. It allows users to message Eatch Outher. This application also includes user authentication.Here use Firebase Storage and FireStore Database.
 
 ## **Features**
 
@@ -30,12 +29,13 @@ here use FireStor and Firebase storage.
 
 ## **Technologies Used**
 
-- **Frontend**: React.js, React Router
-- **Backend**: Node.js, Express.js 
-- **Database**: MongoDB 
-- **Styling**: Bootstrap
-- **Icons**: React Icons
-- **Authentication**: JWT ,Firebase
+- **Frontend**: React.js, Emoji picker react ,
+- **Backend**: FireStore Database
+- **Database**:Firebase Storage
+- **State management **:zustand
+- **Styling**: Raw Css
+- **PopUp**: React toastify
+- **Authentication**: Firebase
 
 ## **Getting Started**
 
