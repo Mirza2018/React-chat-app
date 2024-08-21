@@ -58,7 +58,7 @@ npm run dev
 ## **Project Structure**
 
 ```plaintext
-ecommerce-app/
+star-message-app/
 ├── public/
 ├── src/
 │   ├── assets/              # Images, icons, etc.
