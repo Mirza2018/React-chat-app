@@ -1,6 +1,6 @@
 # **Star Message App**
 
-![Logo](https://i.ibb.co/NpwPr5f/Screenshot-2024-08-21-193032.png) 
+![Logo](/public/h1.png) 
 
 
 
@@ -18,21 +18,22 @@
 
 ## **About**
 
-This is  real-time chat application. It allows users to message Eatch Outher. This application also includes user authentication.Here use Firebase Storage and FireStore Database.
+This is real-time chat application. It allows users to message Eatch Outher. This application also includes user authentication.Here use Firebase Storage and FireStore Database.
 
 ## **Features**
 
+- Real time chat 
+- Image send, emoji send
+- User block and unblock
 - User Authentication (Sign Up, Login, Logout)
-- News watch by Categories
-- Responsive Design
 
 
 ## **Technologies Used**
 
-- **Frontend**: React.js, Emoji picker react ,
+- **Frontend**: React.js, Emoji picker react 
 - **Backend**: FireStore Database
 - **Database**:Firebase Storage
-- **State management **:zustand
+- **State management**:zustand
 - **Styling**: Raw Css
 - **PopUp**: React toastify
 - **Authentication**: Firebase
@@ -51,8 +52,13 @@ npm install
 
 ### **Running the App**
 ```bash
-cd star-message-app
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
 ## **Project Structure**
@@ -76,9 +82,9 @@ star-message-app/
 ## **Screenshots**
 
 #### **Running the App**
-![Home Page 1](https://i.ibb.co/NpwPr5f/Screenshot-2024-08-21-193032.png) 
-![Home Page 2](https://i.ibb.co/W5GHhRG/Screenshot-2024-08-21-193116.png) 
-![Home Page 3](https://i.ibb.co/LNy7CGb/Screenshot-2024-08-21-193153.png) 
+![Home Page 1](/public/h1.png) 
+![Home Page 2](/public/h2.png) 
+![Home Page 3](/public/h3.png) 
 
 
 
